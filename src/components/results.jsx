@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import EnteredEmails from './enteredEmails';
 
 export default function Results() {
     const [data, setData] = useState([]);
@@ -11,7 +12,7 @@ export default function Results() {
         .then(response => response.json())
         .then(json => {
             setData(json)
-            console.log('parsed json', json)
+            // console.log('parsed json', json)
             }
         ).catch(error => {
             console.log("error", error);
@@ -33,36 +34,57 @@ export default function Results() {
         } 
     }
 
-    const addEmail = e => {
-        if (e.currentTarget.textContent){
-            let enteredEmail = e.currentTarget.textContent.trim();
-            if(enteredEmail) {
-                setEnteredEmails([...enteredEmails, enteredEmail]);
-                setValue(e.currentTarget.textContent);
-            }
-        }   
-        else if (['Enter', ','].includes(e.key)) {
-            e.preventDefault();
+    const handleKeyDown = e => {
+        e.preventDefault();
         let enteredEmail = value.trim();
             if(enteredEmail) {
-                setEnteredEmails([...enteredEmails, enteredEmail]);
+                setEnteredEmails((enteredEmails) => [...enteredEmails, {email: enteredEmail, isValid: isValid(enteredEmail)}]);
             }   
+    }
+
+    const handleOnClick = e => {
+        let enteredEmail = e.currentTarget.textContent.trim();
+        if(enteredEmail) {
+            setEnteredEmails((enteredEmails) => [...enteredEmails, {email: enteredEmail, isValid: isValid(enteredEmail)}]);
+        }
+    }
+
+    const addEmail = e => {
+        if (e.currentTarget.textContent){
+            handleOnClick(e);
+        }   
+        else if (['Enter', ','].includes(e.key)) {
+            handleKeyDown(e);
         }
     }
 
     const handleDelete = removeEmail => {
-        let updateEmails = [...enteredEmails];
-        setEnteredEmails(updateEmails.filter(email => email !== removeEmail));
+        setEnteredEmails(enteredEmails.filter((email) => (email.email !== removeEmail)));
     }
+
+    const isEmail = enteredEmail => {
+        return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(enteredEmail);
+      };
+    
+      const isDuplicate = enteredEmail => { 
+        return enteredEmails.some(x => x.email === enteredEmail)
+      };
+    
+      const isValid = enteredEmail => {
+        const isValidEmail = isEmail(enteredEmail);
+        console.log("isValidEmail", isEmail(enteredEmail));
+        const isDuplicateEmail = isDuplicate(enteredEmail);
+        console.log("isDuplicateEmail", isDuplicate(enteredEmail));
+        if (isValidEmail && !isDuplicateEmail) return true;
+        return false;
+      };
 
     return (
         <div>
             <input placeholder='Enter recipients...' onChange={handleChange} onKeyDown={addEmail} value={value} type="text"></input>
-            {enteredEmails.map((enteredEmail) => 
-                    <div key={enteredEmail}>{enteredEmail}
-                    <button type="button" onClick={()=>handleDelete(enteredEmail)}>x</button>
-                    </div>
-            )}  
+            {enteredEmails.map((enteredEmail, i) => (
+                <EnteredEmails enteredEmail={enteredEmail} key={i} isValid={isValid} handleDelete={handleDelete} />
+            ))}
                 <div>---------</div>
 
        
