@@ -1,6 +1,6 @@
 # Aspire - Email "To Field"
 
-- Create the "To" field in an email
+- Create the "To" field in an email: include validations, styling
 
 ### Things I Would Add If I Had More Time
 
@@ -8,6 +8,7 @@
 - Add a check to not display the email list background if there was nothing matching the typed input
 - Import an x and ! icon instead of using the characters 'x' and '!'
 - Make the invalid inputs red on hover instead of gray
+- Add responsiveness for mobile
 - Add css for cross browser compatibility
 - Change cursor to the right cursor when hovering over the list of emails
 
@@ -19,7 +20,7 @@
 
 ### UX Suggestions
 
-- For the initial state of added emails, it's a little out of user norm for the email tag to not be outlined/coloured. I see that it's bolded but it's still pretty different from what users are used to - bold usually means important but in this case the meaning is a bit lost. It's not really until I hover over a valid email or add another email that I know for sure it was successfully added. Moreover, because the x only shows up on hover, that means that the added emails would shift every time someone hovers over an added email that is not the most recently added one. Or when the input width is long enough for a new input but on hover it isn't, that would also cause a shift to a new line only on hover. I would suggest to make the intial added state more obvious such as include a non disappearing x/outline/colored etc. so that users don't have to try to figure out what they are already supposed know, and don't have to see a shift on every hover.
+- For the initial state of added emails, it's a little out of user norm for the email tag to not be outlined/coloured. I see that it's bolded but it's still pretty different from what users are used to - bold usually means important but in this case the meaning is a bit lost. It's not really until I hover over a valid email or add another email that I know for sure it was successfully added. Moreover, because the x only shows up on hover, that means that the added emails would shift every time someone hovers over an added email that is not the most recently added one. Or when the input width is long enough for a new input but on hover it isn't, that would also cause a shift to a new line, such that when the mouse stops hovering that item, the line would disappear. I would suggest to make the intial added state more obvious such as include a non disappearing x/outline/colored etc. so that users don't have to try to figure out what they are already supposed know, and don't have to see a shift on every hover.
 - For inputs that are invalid as emails, it may be helpful to include the reason in text - eg. "The email was already added". This helps the user know immediately without guessing as to why their input did not work/is considered invalid
 
 ## Other Information
