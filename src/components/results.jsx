@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EnteredEmails from './enteredEmails';
+import Input from './input';
 
 export default function Results() {
     const [data, setData] = useState([]);
@@ -12,7 +13,6 @@ export default function Results() {
         .then(response => response.json())
         .then(json => {
             setData(json)
-            // console.log('parsed json', json)
             }
         ).catch(error => {
             console.log("error", error);
@@ -36,16 +36,19 @@ export default function Results() {
 
     const handleKeyDown = e => {
         e.preventDefault();
-        let enteredEmail = value.trim();
-            if(enteredEmail) {
-                setEnteredEmails((enteredEmails) => [...enteredEmails, {email: enteredEmail, isValid: isValid(enteredEmail)}]);
-            }   
+        const enteredEmail = e.target.value.trim(); 
+        if(enteredEmail) {
+            setEnteredEmails((enteredEmails) => [...enteredEmails, {email: enteredEmail, isValid: isValid(enteredEmail)}]);
+            setValue("");
+        }   
     }
 
     const handleOnClick = e => {
-        let enteredEmail = e.currentTarget.textContent.trim();
+        const enteredEmail = e.currentTarget.textContent.trim();
         if(enteredEmail) {
             setEnteredEmails((enteredEmails) => [...enteredEmails, {email: enteredEmail, isValid: isValid(enteredEmail)}]);
+            setValue("");
+            document.querySelector("input").focus();
         }
     }
 
@@ -66,31 +69,38 @@ export default function Results() {
         return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(enteredEmail);
       };
     
-      const isDuplicate = enteredEmail => { 
+    const isDuplicate = enteredEmail => { 
         return enteredEmails.some(x => x.email === enteredEmail)
-      };
-    
-      const isValid = enteredEmail => {
+    };
+
+    const isValid = enteredEmail => {
         const isValidEmail = isEmail(enteredEmail);
-        console.log("isValidEmail", isEmail(enteredEmail));
         const isDuplicateEmail = isDuplicate(enteredEmail);
-        console.log("isDuplicateEmail", isDuplicate(enteredEmail));
         if (isValidEmail && !isDuplicateEmail) return true;
         return false;
-      };
+    };
 
     return (
-        <div>
-            <input placeholder='Enter recipients...' onChange={handleChange} onKeyDown={addEmail} value={value} type="text"></input>
-            {enteredEmails.map((enteredEmail, i) => (
-                <EnteredEmails enteredEmail={enteredEmail} key={i} isValid={isValid} handleDelete={handleDelete} />
-            ))}
-                <div>---------</div>
-
-       
-            {filteredData.map((email, index) => (
-                    <div onClick={addEmail} key={index}>{email}</div>
+        <div className="verticalAlign">
+            <div className="formField">
+                {enteredEmails.map((enteredEmail, i) => (
+                    <EnteredEmails enteredEmail={enteredEmail} key={i} isValid={isValid} handleDelete={handleDelete} />
                 ))}
+                <Input enteredEmails={enteredEmails} handleChange={handleChange} addEmail={addEmail} value={value} />
+            </div>
+            <br/>
+            <div className={value.trim().length >= 1 ? "list" : ""}>
+                {filteredData.map((email, index) => (
+                    <div
+                        className={
+                            value.trim().length >= 1 ? "listItems" : "hidden"
+                        }
+                        onClick={addEmail} 
+                        key={index}>
+                        {email}
+                    </div>
+                ))}
+            </div>
         </div>
     )
         

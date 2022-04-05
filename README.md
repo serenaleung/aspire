@@ -1,71 +1,34 @@
-# Getting Started with Create React App
+# Aspire - Email "To Field"
+
+- Create the "To" field in an email
+
+### Things I Would Add If I Had More Time
+
+- 'Enter' and ',' on the keyboard works currently to add emails, but I would add 'Backspace'/'Delete' to delete an entered email
+- Add a check to not display the email list background if there was nothing matching the typed input
+- Import an x and ! icon instead of using the characters 'x' and '!'
+- Make the invalid inputs red on hover instead of gray
+- Add css for cross browser compatibility
+- Change cursor to the right cursor when hovering over the list of emails
+
+### Things I Did Change
+
+- Used .includes() for search instead of .startsWith() to include all search results, instead of only displaying results that start with the input letter(s)
+- I made the input expand vertically instead of having to scroll horizontally when the email list is wider than the input width so that the user can easily see all the inputted emails
+- I made the input wider than the image shown so that more emails can be added before it starts going to the next line
+
+### UX Suggestions
+
+- For the initial state of added emails, it's a little out of user norm for the email tag to not be outlined/coloured. I see that it's bolded but it's still pretty different from what users are used to - bold usually means important but in this case the meaning is a bit lost. It's not really until I hover over a valid email or add another email that I know for sure it was successfully added. Moreover, because the x only shows up on hover, that means that the added emails would shift every time someone hovers over an added email that is not the most recently added one. Or when the input width is long enough for a new input but on hover it isn't, that would also cause a shift to a new line only on hover. I would suggest to make the intial added state more obvious such as include a non disappearing x/outline/colored etc. so that users don't have to try to figure out what they are already supposed know, and don't have to see a shift on every hover.
+- For inputs that are invalid as emails, it may be helpful to include the reason in text - eg. "The email was already added". This helps the user know immediately without guessing as to why their input did not work/is considered invalid
+
+## Other Information
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# aspire
